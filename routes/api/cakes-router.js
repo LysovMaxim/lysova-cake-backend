@@ -1,12 +1,9 @@
-import express from "express"
+import express from "express";
 
-import cakesService from "../../models/cakes.js"
+import cakesController from "../../controllers/cakes-controller.js";
 
-const cakesRouter = express.Router()
+const cakesRouter = express.Router();
 
-cakesRouter.get("/", async (req, res) => {
-    const result = await cakesService.listCakes();
-    res.json(result)
-})
+cakesRouter.get("/",cakesController.getAll);
 
-export default cakesRouter
+export default cakesRouter;
