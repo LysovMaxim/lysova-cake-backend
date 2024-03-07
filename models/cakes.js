@@ -1,10 +1,27 @@
-import { Schema, model } from "mongoose"
+import { Schema, model } from "mongoose";
 
-const cakeSchema = new Schema({
-    title: String,
-    director:String
-})
+import { handleSaveError } from "./hooks.js";
 
-const Cake = model("cake", cakeSchema)
+const cakeSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: String,
+      required: true,
+    },
+    weight: {
+      type: String,
+      required: true,
+    },
+  },
+  { versionKey: false, timestamps: true }
+);
 
-export default Cake
+cakeSchema.post("save", handleSaveError);
+
+const Cake = model("cake", cakeSchema);
+
+export default Cake;
